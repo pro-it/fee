@@ -8,8 +8,7 @@ class Env:
     VARS = [
         'PROIT_FEE_URL',
         'PROIT_FEE_KEY',
-        'PROIT_FEE_YEAR',
-        'PROIT_FEE_MONTH'
+        'PROIT_FEE_YEAR'
     ]
 
     CONFIG_FILE = './.env'
@@ -26,6 +25,5 @@ class Env:
 
         # PROIT_FEE_YEAR
         self.year = os.getenv(self.VARS[2], None)
-
-        # PROIT_FEE_MONTH
-        self.month = os.getenv(self.VARS[3], None)
+        if self.year:
+            self.year = int(self.year)

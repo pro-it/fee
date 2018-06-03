@@ -10,8 +10,7 @@ def fee():
 
     Search(url=_env.url,
            key=_env.key,
-           year=_env.year,
-           month=_env.month).go()
+           year=_env.year).go()
 
     Build(None).go
 

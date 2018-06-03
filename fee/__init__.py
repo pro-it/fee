@@ -5,6 +5,7 @@ from fee.search import Search
 import sys
 from time import strftime
 
+
 __all__ = [
     'env',
     'build',
@@ -14,7 +15,6 @@ __all__ = [
 
 DATE_FORMAT = '%Y/%m/%d %H:%M:%S'
 RRINT_SPACE = '    '
-
 
 def message(text, end='\n'):
     """
