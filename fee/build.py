@@ -3,10 +3,17 @@ class Build:
     """
     """
 
-    def __init__(self, values):
+    DEFAULT_PERCENT = 20.0
+
+    def __init__(self, values, percent=None, filename=Nome):
         """
         """
+        self.filename = filename
         self.values = values
+
+        self.percent = percent
+        if not self.percent:
+            self.percent = self.DEFAULT_PERCENT
 
     def go(self):
         """

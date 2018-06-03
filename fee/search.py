@@ -29,7 +29,7 @@ class Search:
     def __init__(self, url=None, key=None, year=None):
         """
         """
-        self._map = []
+        self._map = {}
 
         self.url = url
         if not self.url:
