@@ -9,7 +9,8 @@ def fee_search():
 
     Search(month=_env.month,
            year=_env.year,
-           key=_env.key).go()
+           key=_env.key,
+           url=_env.url).go()
 
 
 fee_search()
