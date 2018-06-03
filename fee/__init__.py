@@ -1,4 +1,5 @@
 from fee.env import Env
+from fee.build import Build
 from fee.search import Search
 
 import sys
@@ -6,6 +7,7 @@ from time import strftime
 
 __all__ = [
     'env',
+    'build',
     'search'
 ]
 

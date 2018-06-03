@@ -1,16 +1,19 @@
 from fee.env import Env
+from fee.build import Build
 from fee.search import Search
 
 
-def fee_search():
+def fee():
     """
     """
     _env = Env()
 
-    Search(month=_env.month,
-           year=_env.year,
+    Search(url=_env.url,
            key=_env.key,
-           url=_env.url).go()
+           year=_env.year,
+           month=_env.month).go()
+
+    Build(None).go
 
 
-fee_search()
+fee()
