@@ -12,16 +12,16 @@ Steps:
 
 ## Execution ##
 
-* python3 -m fee
+    python3 -m fee
 
 
 ## ENV variables ##
 
 To see files .env
 
-* PYTHON_BIN_FILE - 
-* PROIT_FEE_URL - 
-* PROIT_FEE_KEY - 
-* PROIT_FEE_YEAR - 
-* PROIT_FEE_PERCENT - 
-* PROIT_FEE_FILE - 
+    PYTHON_BIN_FILE - 
+    PROIT_FEE_URL - 
+    PROIT_FEE_KEY - 
+    PROIT_FEE_YEAR - 
+    PROIT_FEE_PERCENT - 
+    PROIT_FEE_FILE - 
