@@ -1,4 +1,5 @@
 
+
 class Build:
     """
     """
@@ -9,7 +10,9 @@ class Build:
         """
         """
         if length > 0:
-            self.value = int(sum(self.values)/length*(100+self.percent)/100.0)
+            self.value = int(sum(self.values)/length*
+                             0.01*
+                             (100 + self.percent)/100.0)
 
     def _file_create(self):
         """
@@ -28,7 +31,7 @@ class Build:
         self.value = 0
 
         self.percent = percent
-        if not self.percent:
+        if self.percent is None:
             self.percent = self.DEFAULT_PERCENT
 
     def go(self):
