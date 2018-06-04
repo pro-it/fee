@@ -7,18 +7,18 @@ class Build:
     DEFAULT_PERCENT = 1.0
     DEFAULT_STAT_PERCENT = 0.0
 
-    MAGIC_ROUND_STEP = 5.0
+    MAGIC_ROUNDING_STEP = 5.0
 
-    def _magic_round(self):
+    def _magic_rounding(self):
         """
         """
-        magic = self.value/self.MAGIC_ROUND_STEP
+        magic = self.value/self.MAGIC_ROUNDING_STEP
         magic_i = int(magic)
 
         if magic == magic_i:
             self.value = magic_i
         else:
-            self.value = int((magic_i + 1)*self.MAGIC_ROUND_STEP)
+            self.value = int((magic_i + 1)*self.MAGIC_ROUNDING_STEP)
 
         magic = None
         magic_i = None
@@ -30,7 +30,7 @@ class Build:
             self.value = int(sum(self.values)/length*
                              self.percent/100.0*
                              (100.0 + self.stat_percent)/100.0)
-            self._magic_round()
+            self._magic_rounding()
 
     def _file_create(self):
         """
