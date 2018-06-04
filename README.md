@@ -7,7 +7,7 @@ Need use Python version more than 3.4.
 
 Steps:
 
-* sudo apt-get install libxml2-dev libxslt1-dev
+* sudo apt-get install libxml2-dev libxslt1-dev python3-pip
 * pip3 install $(cat ./requires.txt)
 
 ## Execution ##
