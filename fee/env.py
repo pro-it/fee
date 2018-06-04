@@ -10,6 +10,7 @@ class Env:
         'PROIT_FEE_KEY',
         'PROIT_FEE_YEAR',
         'PROIT_FEE_PERCENT',
+        'PROIT_FEE_STATE_URL',
         'PROIT_FEE_FILE'
     ]
 
@@ -35,5 +36,8 @@ class Env:
         if self.percent:
             self.percent = float(self.percent)
 
+        # PROIT_FEE_STATE_URL
+        self.state_url = os.getenv(self.VARS[4], None)
+
         # PROIT_FEE_FILE
-        self.filename = os.getenv(self.VARS[4], None)
+        self.filename = os.getenv(self.VARS[5], None)

@@ -10,7 +10,8 @@ def fee():
 
     Build(values=Search(url=env.url,
                         key=env.key,
-                        year=env.year).go(),
+                        year=env.year,
+                        state_url=env.state_url).go(),
           percent=env.percent,
           filename=env.filename).go()
 

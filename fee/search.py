@@ -13,6 +13,9 @@ class Search:
     DEFAULT_KEY = ('информационные технологии и деятельность'
                    ' в области информационного обслуживания')
     DEFAULT_YEAR = datetime.now().year - 1
+    DEFAULT_STATE_URL = ('http://www.belstat.gov.by/ofitsialnaya-statistika/'
+                         'makroekonomika-i-okruzhayushchaya-sreda/tseny/'
+                         'godovye-dannye_3/indeksy-tsen-i-tarifov/')
 
     # Routing map for months
     MONTH_MAP = [
@@ -114,14 +117,18 @@ class Search:
         for i in r.find_all('div'):
             div = i.get('class')
 
-            if div and div[0] == 'catalogue':
+            if div and div[0] and div[0] == 'catalogue':
                 for li in i.find_all('li'):
                     if li.a:
                         for link in self._months_links(bs4_a=li.a):
                             self._month_value(link)
                 break
 
-    def __init__(self, url=None, key=None, year=None):
+    def _stat_percent(self):
+        """
+        """
+
+    def __init__(self, url=None, key=None, year=None, state_url=None):
         """
         """
         self.url = url
@@ -136,13 +143,19 @@ class Search:
         if not self.year:
             self.year = self.DEFAULT_YEAR
 
+        self.state_url = state_url
+        if not self.state_url:
+            self.state_url = self.DEFAULT_STATE_URL
+
         self.session = requests.Session()
         self.values = []
         self.domain = self._domain(self.url)
+        self.stat_percent = 0
 
     def go(self):
         """
         """
         self._months_list()
+        self._stat_percent()
 
         return self.values

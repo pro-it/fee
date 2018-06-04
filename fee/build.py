@@ -4,15 +4,21 @@ class Build:
     """
     """
 
-    DEFAULT_PERCENT = 20.0
+    DEFAULT_PERCENT = 1.0
+    DEFAULT_STAT_PERCENT = 0.0
+
+    def _magic_round(self):
+        """
+        """
 
     def _build(self, length):
         """
         """
         if length > 0:
             self.value = int(sum(self.values)/length*
-                             0.01*
-                             (100 + self.percent)/100.0)
+                             self.percent/100.0*
+                             (100.0 + self.stat_percent)/100.0)
+            self._magic_round()
 
     def _file_create(self):
         """
@@ -23,7 +29,7 @@ class Build:
                 f.write(str(self.value))
                 f.close()
 
-    def __init__(self, values, percent=None, filename=None):
+    def __init__(self, values, percent=None, stat_percent=None, filename=None):
         """
         """
         self.filename = filename
@@ -33,6 +39,10 @@ class Build:
         self.percent = percent
         if self.percent is None:
             self.percent = self.DEFAULT_PERCENT
+
+        self.stat_percent = stat_percent
+        if self.stat_percent is None:
+            self.stat_percent = self.DEFAULT_STAT_PERCENT
 
     def go(self):
         """
