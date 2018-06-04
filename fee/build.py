@@ -5,7 +5,7 @@ class Build:
 
     DEFAULT_PERCENT = 20.0
 
-    def __init__(self, values, percent=None, filename=Nome):
+    def __init__(self, values, percent=None, filename=None):
         """
         """
         self.filename = filename

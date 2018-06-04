@@ -46,3 +46,4 @@ class Search:
     def go(self):
         """
         """
+        return self._map

@@ -8,11 +8,13 @@ def fee():
     """
     _env = Env()
 
-    Search(url=_env.url,
-           key=_env.key,
-           year=_env.year).go()
+    results = Search(url=_env.url,
+                     key=_env.key,
+                     year=_env.year).go()
 
-    Build(None).go
+    Build(values=results,
+          percent=_env.percent,
+          filename=_env.filename).go()
 
 
 fee()
