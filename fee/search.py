@@ -150,12 +150,14 @@ class Search:
         self.session = requests.Session()
         self.values = []
         self.domain = self._domain(self.url)
-        self.stat_percent = 0
+        self.stat_percent = None
 
     def go(self):
         """
         """
         self._months_list()
-        self._stat_percent()
+
+        if len(self.values) > 0:
+            self._stat_percent()
 
         return self.values
