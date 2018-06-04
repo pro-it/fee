@@ -6,15 +6,13 @@ from fee.search import Search
 def fee():
     """
     """
-    _env = Env()
+    env = Env()
 
-    results = Search(url=_env.url,
-                     key=_env.key,
-                     year=_env.year).go()
-
-    Build(values=results,
-          percent=_env.percent,
-          filename=_env.filename).go()
+    Build(values=Search(url=env.url,
+                        key=env.key,
+                        year=env.year).go(),
+          percent=env.percent,
+          filename=env.filename).go()
 
 
 fee()

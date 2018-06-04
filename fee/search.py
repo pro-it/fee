@@ -29,7 +29,7 @@ class Search:
     def __init__(self, url=None, key=None, year=None):
         """
         """
-        self._map = {}
+        self.values = []
 
         self.url = url
         if not self.url:
@@ -46,4 +46,4 @@ class Search:
     def go(self):
         """
         """
-        return self._map
+        return self.values
