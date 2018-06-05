@@ -10,8 +10,8 @@ class Search:
     DEFAULT_STAT_URL = ('http://www.belstat.gov.by/ofitsialnaya-statistika/'
                         'solialnaya-sfera/trud/operativnaya-informatsiya_8/'
                         'o-nachislennoi-srednei-zarabotnoi-plate-rabotnikov/')
-    DEFAULT_STAT_KEY = ('информационные технологии и деятельность'
-                        ' в области информационного обслуживания')
+    DEFAULT_STAT_KEY = ('информационные технологии и деятельность '
+                        'в области информационного обслуживания')
     DEFAULT_STAT_PERCENT_URL = ('http://www.belstat.gov.by/'
                                 'ofitsialnaya-statistika/'
                                 'makroekonomika-i-okruzhayushchaya-sreda/'
@@ -127,6 +127,7 @@ class Search:
         """
         r = self._connection(self.stat_percent_url)
         r = r.find('table', class_='autotbl nohead')
+
         i = None
         i_year = None
         str_year = str(self.stat_year)
