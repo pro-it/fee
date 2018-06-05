@@ -19,9 +19,10 @@ Steps:
 
 To see files .env
 
-    PYTHON_BIN_FILE - 
-    PROIT_FEE_URL - 
-    PROIT_FEE_KEY - 
-    PROIT_FEE_YEAR - 
-    PROIT_FEE_PERCENT - 
-    PROIT_FEE_FILE - 
+    PYTHON_BIN_FILE - (by default: python3)
+    PROIT_FEE_STAT_URL - (by default: no)
+    PROIT_FEE_STAT_KEY - (by default: no)
+    PROIT_FEE_STAT_PERCENT_URL - (by default: no)
+    PROIT_FEE_YEAR - (by default: current year)
+    PROIT_FEE_PERCENT - (by default: 1.0)
+    PROIT_FEE_FILE - (by default: path on server)
