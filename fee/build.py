@@ -27,7 +27,7 @@ class Build:
         """
         """
         if length > 0:
-            self.value = int(sum(self.values)/length*
+            self.value = int(sum(self.stat_values)/length*
                              self.percent/100.0*
                              (100.0 + self.stat_percent)/100.0)
             self._magic_rounding()
@@ -41,11 +41,15 @@ class Build:
                 f.write(str(self.value))
                 f.close()
 
-    def __init__(self, values, percent=None, stat_percent=None, filename=None):
+    def __init__(self,
+                 stat_values,
+                 stat_percent=None,
+                 percent=None,
+                 filename=None):
         """
         """
+        self.stat_values = stat_values
         self.filename = filename
-        self.values = values
         self.value = 0
 
         self.percent = percent
@@ -59,5 +63,5 @@ class Build:
     def go(self):
         """
         """
-        self._build(length=len(self.values))
+        self._build(length=len(self.stat_values))
         self._file_create()

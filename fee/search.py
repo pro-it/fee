@@ -12,10 +12,12 @@ class Search:
                    'o-nachislennoi-srednei-zarabotnoi-plate-rabotnikov/')
     DEFAULT_KEY = ('информационные технологии и деятельность'
                    ' в области информационного обслуживания')
+    DEFAULT_STAT_PERCENT_URL = ('http://www.belstat.gov.by/'
+                                'ofitsialnaya-statistika/'
+                                'makroekonomika-i-okruzhayushchaya-sreda/'
+                                'tseny/godovye-dannye_3/'
+                                'indeksy-tsen-i-tarifov/')
     DEFAULT_YEAR = datetime.now().year - 1
-    DEFAULT_STATE_URL = ('http://www.belstat.gov.by/ofitsialnaya-statistika/'
-                         'makroekonomika-i-okruzhayushchaya-sreda/tseny/'
-                         'godovye-dannye_3/indeksy-tsen-i-tarifov/')
 
     # Routing map for months
     MONTH_MAP = [
@@ -33,8 +35,6 @@ class Search:
         'в декабре'
     ]
 
-    # Content encoding
-    ENCODING = 'utf-8'
     # Parser type of BeautifulSoup
     BS4_PARSER = 'lxml'
 
@@ -101,18 +101,18 @@ class Search:
         r = self._connection('{}{}'.format(self.domain, link))
 
         for tr in r.find_all('tr'):
-            if tr.td and self._text(tr.td) == self.key:
+            if tr.td and self._text(tr.td) == self.stat_key:
                 for td in tr.find_all('td'):
-                    if self._text(td) == self.key:
+                    if self._text(td) == self.stat_key:
                         continue
 
-                    self.values.append(self._float(td))
+                    self.stat_values.append(self._float(td))
                     break
 
     def _months_list(self):
         """
         """
-        r = self._connection(self.url)
+        r = self._connection(self.stat_url)
 
         for i in r.find_all('div'):
             div = i.get('class')
@@ -128,28 +128,32 @@ class Search:
         """
         """
 
-    def __init__(self, url=None, key=None, year=None, state_url=None):
+    def __init__(self,
+                 stat_url=None,
+                 stat_key=None,
+                 stat_percent_url=None,
+                 year=None):
         """
         """
-        self.url = url
-        if not self.url:
-            self.url = self.DEFAULT_URL
+        self.stat_url = stat_url
+        if not self.stat_url:
+            self.stat_url = self.DEFAULT_URL
 
-        self.key = key
-        if not self.key:
-            self.key = self.DEFAULT_KEY
+        self.stat_key = stat_key
+        if not self.stat_key:
+            self.stat_key = self.DEFAULT_KEY
+
+        self.stat_percent_url = stat_percent_url
+        if not self.stat_percent_url:
+            self.stat_percent_url = self.DEFAULT_STAT_PERCENT_URL
 
         self.year = year
         if not self.year:
             self.year = self.DEFAULT_YEAR
 
-        self.state_url = state_url
-        if not self.state_url:
-            self.state_url = self.DEFAULT_STATE_URL
-
         self.session = requests.Session()
-        self.values = []
-        self.domain = self._domain(self.url)
+        self.stat_values = []
+        self.domain = self._domain(self.stat_url)
         self.stat_percent = None
 
     def go(self):
@@ -157,7 +161,5 @@ class Search:
         """
         self._months_list()
 
-        if len(self.values) > 0:
+        if len(self.stat_values) > 0:
             self._stat_percent()
-
-        return self.values
