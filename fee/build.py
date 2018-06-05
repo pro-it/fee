@@ -4,8 +4,8 @@ class Build:
     """
     """
 
-    DEFAULT_PERCENT = 1.0
     DEFAULT_STAT_PERCENT = 0.0
+    DEFAULT_PERCENT = 1.0
 
     MAGIC_ROUNDING_STEP = 5.0
 

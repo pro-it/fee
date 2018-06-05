@@ -7,11 +7,11 @@ import requests
 class Search:
     """
     """
-    DEFAULT_URL = ('http://www.belstat.gov.by/ofitsialnaya-statistika/'
-                   'solialnaya-sfera/trud/operativnaya-informatsiya_8/'
-                   'o-nachislennoi-srednei-zarabotnoi-plate-rabotnikov/')
-    DEFAULT_KEY = ('информационные технологии и деятельность'
-                   ' в области информационного обслуживания')
+    DEFAULT_STAT_URL = ('http://www.belstat.gov.by/ofitsialnaya-statistika/'
+                        'solialnaya-sfera/trud/operativnaya-informatsiya_8/'
+                        'o-nachislennoi-srednei-zarabotnoi-plate-rabotnikov/')
+    DEFAULT_STAT_KEY = ('информационные технологии и деятельность'
+                        ' в области информационного обслуживания')
     DEFAULT_STAT_PERCENT_URL = ('http://www.belstat.gov.by/'
                                 'ofitsialnaya-statistika/'
                                 'makroekonomika-i-okruzhayushchaya-sreda/'
@@ -174,11 +174,11 @@ class Search:
         """
         self.stat_url = stat_url
         if not self.stat_url:
-            self.stat_url = self.DEFAULT_URL
+            self.stat_url = self.DEFAULT_STAT_URL
 
         self.stat_key = stat_key
         if not self.stat_key:
-            self.stat_key = self.DEFAULT_KEY
+            self.stat_key = self.DEFAULT_STAT_KEY
 
         self.stat_percent_url = stat_percent_url
         if not self.stat_percent_url:
