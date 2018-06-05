@@ -15,9 +15,7 @@ class Build:
         magic = self.value/self.MAGIC_ROUNDING_STEP
         magic_i = int(magic)
 
-        if magic == magic_i:
-            self.value = magic_i
-        else:
+        if magic != magic_i:
             self.value = int((magic_i + 1)*self.MAGIC_ROUNDING_STEP)
 
         magic = None
