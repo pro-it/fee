@@ -11,7 +11,8 @@ def fee():
     search = Search(stat_url=env.stat_url,
                     stat_key=env.stat_key,
                     stat_percent_url=env.stat_percent_url,
-                    year=env.year)
+                    stat_percent_key=env.stat_percent_key,
+                    stat_year=env.stat_year)
     search.go()
 
     Build(stat_values=search.stat_values,

@@ -17,7 +17,8 @@ class Search:
                                 'makroekonomika-i-okruzhayushchaya-sreda/'
                                 'tseny/godovye-dannye_3/'
                                 'indeksy-tsen-i-tarifov/')
-    DEFAULT_YEAR = datetime.now().year - 1
+    DEFAULT_STAT_PERCENT_KEY = 'Индекс потребительских цен'
+    DEFAULT_STAT_YEAR = datetime.now().year - 1
 
     # Routing map for months
     MONTH_MAP = [
@@ -89,7 +90,7 @@ class Search:
         """
         """
         for m in self.MONTH_MAP:
-            if '{} {} '.format(m, self.year) in self._text(bs4_a):
+            if '{} {} '.format(m, self.stat_year) in self._text(bs4_a):
                 href = bs4_a.get('href')
 
                 if href:
@@ -128,7 +129,8 @@ class Search:
         r = r.find('table', class_='autotbl nohead')
         i = None
         i_year = None
-        str_year = str(self.year)
+        str_year = str(self.stat_year)
+        is_key_year = False
 
         for tr in r.find_all('tr'):
             for th in tr.find_all('th'):
@@ -147,20 +149,27 @@ class Search:
 
             for td in tr.find_all('td'):
                 if td.p:
-                    i -= 1
-                    if i == 0:
-                        i = None
-                        i_year = None
-                        str_year = None
-                        self.stat_percent = self._float(td.p) - 100.0
+                    if is_key_year:
+                        i -= 1
 
-                        return
+                        if i == 0:
+                            i = None
+                            i_year = None
+                            str_year = None
+                            self.stat_percent = self._float(td.p) - 100.0
+
+                            return
+                    else:
+                        if self._text(td.p) == self.stat_percent_key:
+                            is_key_year = True
+                            i -= 1
 
     def __init__(self,
                  stat_url=None,
                  stat_key=None,
                  stat_percent_url=None,
-                 year=None):
+                 stat_percent_key=None,
+                 stat_year=None):
         """
         """
         self.stat_url = stat_url
@@ -175,9 +184,13 @@ class Search:
         if not self.stat_percent_url:
             self.stat_percent_url = self.DEFAULT_STAT_PERCENT_URL
 
-        self.year = year
-        if not self.year:
-            self.year = self.DEFAULT_YEAR
+        self.stat_percent_key = stat_percent_key
+        if not self.stat_percent_key:
+            self.stat_percent_key = self.DEFAULT_STAT_PERCENT_KEY
+
+        self.stat_year = stat_year
+        if not self.stat_year:
+            self.stat_year = self.DEFAULT_STAT_YEAR
 
         self.session = requests.Session()
         self.stat_values = []

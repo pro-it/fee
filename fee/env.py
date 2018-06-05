@@ -9,7 +9,8 @@ class Env:
         'PROIT_FEE_STAT_URL',
         'PROIT_FEE_STAT_KEY',
         'PROIT_FEE_STAT_PERCENT_URL',
-        'PROIT_FEE_YEAR',
+        'PROIT_FEE_STAT_PERCENT_KEY',
+        'PROIT_FEE_STAT_YEAR',
         'PROIT_FEE_PERCENT',
         'PROIT_FEE_FILE'
     ]
@@ -29,15 +30,18 @@ class Env:
         # PROIT_FEE_STAT_PERCENT_URL
         self.stat_percent_url = os.getenv(self.VARS[2], None)
 
-        # PROIT_FEE_YEAR
-        self.year = os.getenv(self.VARS[3], None)
-        if self.year:
-            self.year = int(self.year)
+        # PROIT_FEE_STAT_PERCENT_KEY
+        self.stat_percent_key = os.getenv(self.VARS[3], None)
+
+        # PROIT_FEE_STAT_YEAR
+        self.stat_year = os.getenv(self.VARS[4], None)
+        if self.stat_year:
+            self.stat_year = int(self.stat_year)
 
         # PROIT_FEE_PERCENT
-        self.percent = os.getenv(self.VARS[4], None)
+        self.percent = os.getenv(self.VARS[5], None)
         if self.percent:
             self.percent = float(self.percent)
 
         # PROIT_FEE_FILE
-        self.filename = os.getenv(self.VARS[5], None)
+        self.filename = os.getenv(self.VARS[6], None)
