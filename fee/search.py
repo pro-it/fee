@@ -107,26 +107,54 @@ class Search:
                         continue
 
                     self.stat_values.append(self._float(td))
+
                     break
 
     def _months_list(self):
         """
         """
         r = self._connection(self.stat_url)
+        r = r.find('div', class_='catalogue')
 
-        for i in r.find_all('div'):
-            div = i.get('class')
-
-            if div and div[0] and div[0] == 'catalogue':
-                for li in i.find_all('li'):
-                    if li.a:
-                        for link in self._months_links(bs4_a=li.a):
-                            self._month_value(link)
-                break
+        for li in r.find_all('li'):
+            if li.a:
+                for link in self._months_links(bs4_a=li.a):
+                    self._month_value(link)
 
     def _stat_percent(self):
         """
         """
+        r = self._connection(self.stat_percent_url)
+        r = r.find('table', class_='autotbl nohead')
+        i = None
+        i_year = None
+        str_year = str(self.year)
+
+        for tr in r.find_all('tr'):
+            for th in tr.find_all('th'):
+                if i is None and not th.p:
+                    i = 1
+                elif th.p:
+                    i += 1
+
+                    if self._text(th.p) == str_year:
+                        i_year = str_year
+
+                        continue
+
+            if self.stat_percent is not None or i_year is None:
+                continue
+
+            for td in tr.find_all('td'):
+                if td.p:
+                    i -= 1
+                    if i == 0:
+                        i = None
+                        i_year = None
+                        str_year = None
+                        self.stat_percent = self._float(td.p) - 100.0
+
+                        return
 
     def __init__(self,
                  stat_url=None,
