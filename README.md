@@ -28,4 +28,4 @@ To see files .env
     PROIT_FEE_STAT_YEAR - (by default current year)
 
     PROIT_FEE_PERCENT - (by default: 1.0)
-    PROIT_FEE_FILE - (by default: path on server)
+    PROIT_FEE_FILE - (by default file path on server)
