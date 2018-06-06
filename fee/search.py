@@ -21,7 +21,7 @@ class Search:
     DEFAULT_STAT_YEAR = datetime.now().year - 1
 
     # Routing map for months
-    MONTH_MAP = [
+    STAT_MONTH_MAP = [
         'в январе',
         'в феврале',
         'в марте',
@@ -89,7 +89,7 @@ class Search:
     def _months_links(self, bs4_a):
         """
         """
-        for m in self.MONTH_MAP:
+        for m in self.STAT_MONTH_MAP:
             if '{} {} '.format(m, self.stat_year) in self._text(bs4_a):
                 href = bs4_a.get('href')
 
