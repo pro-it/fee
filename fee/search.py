@@ -122,6 +122,46 @@ class Search:
                 for link in self._months_links(bs4_a=li.a):
                     self._month_value(link)
 
+    def _stat_percent_year_define(self, tr, i):
+        """
+        """
+        str_year = str(self.stat_year)
+
+        for th in tr.find_all('th'):
+            if i is None and not th.p:
+                i = 1
+            elif th.p:
+                i += 1
+
+                if self._text(th.p) == str_year:
+                    return str_year, i
+        return None, i
+
+    def _stat_percent_define(self, p):
+        """
+        """
+        self.stat_percent = self._float(p) - 100.0
+
+    def _stat_percent_key_define(self, tr, i):
+        """
+        """
+        is_key_year = False
+
+        for td in tr.find_all('td'):
+            if td.p:
+                if is_key_year:
+                    i -= 1
+
+                    if i == 0:
+                        self._stat_percent_define(td.p)
+
+                        return True
+                else:
+                    if self._text(td.p) == self.stat_percent_key:
+                        is_key_year = True
+                        i -= 1
+        return False
+
     def _stat_percent(self):
         """
         """
@@ -130,40 +170,15 @@ class Search:
 
         i = None
         i_year = None
-        str_year = str(self.stat_year)
-        is_key_year = False
 
         for tr in r.find_all('tr'):
-            for th in tr.find_all('th'):
-                if i is None and not th.p:
-                    i = 1
-                elif th.p:
-                    i += 1
+            i_year, i = self._stat_percent_year_define(tr, i)
 
-                    if self._text(th.p) == str_year:
-                        i_year = str_year
-
-                        continue
-
-            if self.stat_percent is not None or i_year is None:
+            if self.stat_percent is not None or i_year is not None:
                 continue
 
-            for td in tr.find_all('td'):
-                if td.p:
-                    if is_key_year:
-                        i -= 1
-
-                        if i == 0:
-                            i = None
-                            i_year = None
-                            str_year = None
-                            self.stat_percent = self._float(td.p) - 100.0
-
-                            return
-                    else:
-                        if self._text(td.p) == self.stat_percent_key:
-                            is_key_year = True
-                            i -= 1
+            if self._stat_percent_key_define(tr, i):
+                break
 
     def __init__(self,
                  stat_url=None,
